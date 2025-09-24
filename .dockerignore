@@ -1,0 +1,31 @@
+# Git and versioning
+.git
+.gitignore
+
+# Local dependencies
+node_modules
+
+# Local build / TypeScript output
+dist
+
+# Environment variables (sensitive)
+.env
+.env.local
+
+# Logs / temporary files
+*.log
+logs
+*.tmp
+
+# Database / local volumes
+postgres-data
+*.db
+
+# IDE / OS configs
+.vscode/
+.idea/
+.DS_Store
+
+# Any documentation or example files not needed in the image
+README.md
+docs/
