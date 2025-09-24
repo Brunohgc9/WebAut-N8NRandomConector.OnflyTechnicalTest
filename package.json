@@ -1,0 +1,58 @@
+{
+  "name": "n8n-nodes-random.secondphase",
+  "version": "0.1.0",
+  "description": "Custom node for n8n: True Random Number Generator (Random.org)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "Icons"
+  ],
+  "engines": {
+    "node": ">=22.0.0 <23"
+  },
+  "n8n": {
+    "nodes": [
+      "dist/CustomNodes/TrueNumberGeneratorNode/Presentation/TrueNumberGenerator.node.js"
+    ]
+  },
+  "scripts": {
+    "clean": "rimraf dist .tsbuildinfo",
+    "copy:icons": "cpx \"CustomNodes/TrueNumberGeneratorNode/Presentation/*.svg\" \"dist/TrueNumberGeneratorNode/Presentation/\"",
+    "build": "npm run clean && tsc -p tsconfig.json && npm run copy:icons",
+    "dev": "ts-node-dev --respawn --transpile-only app/CustomNodes/TrueNumberGeneratorNode/Presentation/TrueNumberGenerator.node.ts",
+    "lint": "eslint --ext .ts app",
+    "format": "prettier --write \"app/**/*.ts\" \"README.md\"",
+    "test": "vitest",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "n8n",
+    "n8n-node",
+    "custom-node",
+    "random",
+    "random.org",
+    "typescript"
+  ],
+  "author": "Seu Nome <seu.email@exemplo.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "n8n-core": "^1.112.1",
+    "n8n-workflow": "^1.110.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
+    "cpx": "^1.5.0",
+    "eslint": "^9.35.0",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

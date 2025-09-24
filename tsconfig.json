@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",                   // Compile to ES2022
+    "module": "CommonJS",                 // Use CommonJS module system
+    "lib": ["ES2022"],                    // Standard ES2022 library
+    "rootDir": "CustomNodes",                      // Root folder containing source files
+    "outDir": "dist",                      // Output folder for compiled JS
+    "declaration": true,                   // Generate type declarations
+    "strict": true,                        // Enable all strict type-checking options
+    "esModuleInterop": true,               // Enable interop between CommonJS and ES Modules
+    "skipLibCheck": true                   // Skip type checking of library files
+  },
+  "include": ["CustomNodes/**/*.ts"],              // Include all TypeScript files in app
+  "exclude": ["dist", "node_modules"]      // Exclude compiled files and node_modules
+}
