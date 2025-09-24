@@ -144,3 +144,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Docker volumes / data
+n8n_data/
+postgres-data/

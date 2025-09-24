@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>True Number Generator</title>
+  <desc>Ícone circular com Min, Max, número aleatório e boca sorridente</desc>
+  <defs>
+    <style>
+      .circle { fill:#f2c94c; stroke:#1a1a1a; stroke-width:16; }
+      .text { font-family:Arial, sans-serif; font-weight:700; fill:#1a1a1a; text-anchor:middle; dominant-baseline:middle; }
+    </style>
+  </defs>
+
+  <!-- círculo base -->
+  <circle cx="256" cy="256" r="200" class="circle"/>
+
+  <!-- Min e Max -->
+  <text x="140" y="180" class="text" font-size="48">Min</text>
+  <text x="372" y="180" class="text" font-size="48">Max</text>
+
+  <!-- número aleatório -->
+  <text x="256" y="270" class="text" font-size="96">?</text>
+
+  <!-- boca sorridente -->
+  <path d="M200 380 Q256 420 312 380" fill="none" stroke="#1a1a1a" stroke-width="12" stroke-linecap="round"/>
+</svg>

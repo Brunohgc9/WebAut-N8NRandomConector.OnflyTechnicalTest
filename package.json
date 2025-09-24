@@ -1,5 +1,5 @@
 {
-  "name": "n8n-nodes-random.secondphase",
+  "name": "webaut-n8nrandomconector.onflytechnicaltest",
   "version": "0.1.0",
   "description": "Custom node for n8n: True Random Number Generator (Random.org)",
   "main": "dist/index.js",
