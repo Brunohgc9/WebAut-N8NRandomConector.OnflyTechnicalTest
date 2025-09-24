@@ -47,7 +47,7 @@ cd C:\Users\SeuUsuario\WebAut-N8NRandomConector.OnflyTechnicalTest
 
 ---
 
-Agora é só subir o ambiente: abra o **Docker Desktop e, com o terminal ainda posicionado na **pasta raiz do projeto**, execute:
+Agora é só subir o ambiente: abra o **Docker Desktop** e, com o terminal ainda posicionado na **pasta raiz do projeto**, execute:
 ```bash
 docker-compose up --build
 ```
