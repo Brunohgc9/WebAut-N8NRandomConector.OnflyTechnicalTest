@@ -33,7 +33,6 @@ Para rodar este projeto você precisará de **Git**, **Docker** e **Node.js** (e
 
    ```bash
    git clone https://github.com/Brunohgc9/WebAut-N8NRandomConector.OnflyTechnicalTest.git
-   cd WebAut-N8NRandomConector.OnflyTechnicalTest
    ```
 
 2. **Entrar na pasta raiz do projeto**  
