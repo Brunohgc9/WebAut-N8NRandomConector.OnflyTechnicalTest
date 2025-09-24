@@ -45,7 +45,9 @@ cd C:\Users\SeuUsuario\WebAut-N8NRandomConector.OnflyTechnicalTest
 
 > É **dentro dessa pasta raiz** que ficam os arquivos `docker-compose.yml` e onde você vai rodar os comandos do Docker.
 
-Agora é só subir o ambiente, na **pasta raiz do projeto**, execute:
+---
+
+Agora é só subir o ambiente: abra o **Docker Desktop e, com o terminal ainda posicionado na **pasta raiz do projeto**, execute:
 ```bash
 docker-compose up --build
 ```
