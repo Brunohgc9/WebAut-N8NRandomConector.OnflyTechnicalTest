@@ -4,18 +4,19 @@ Este repositório traz um **conector customizado para o n8n** chamado **Random**
 A ideia é simples: você informa um número mínimo e um máximo, e o node devolve um número realmente aleatório dentro desse intervalo.  
 O detalhe é que essa aleatoriedade não vem de um cálculo local, mas da API pública do [Random.org](https://www.random.org), garantindo resultados mais imprevisíveis.  
 
-Esta é a versão **simplificada (`simple-node`)** → todo o código em um único arquivo dentro do `TrueNumberGenerator`.  
-Não há separação em camadas ou pastas adicionais.
+Esta é a versão **simplificada (`simple-node`)** → todo o código está dentro de um único arquivo no `TrueNumberGenerator`.  
+Não há separação em camadas ou múltiplos diretórios.  
 
 ---
 
-## 🚀 Como instalar e rodar
+## 🚀 Parte 1 — Como instalar e rodar
 
-Para rodar este projeto você precisará de **Git** e **Docker**.  
+Para rodar este projeto você precisará de **Git**, **Docker** e **Node.js** (este último apenas se quiser recompilar o node).  
 
 ### Requisitos
 - **Git** → clonar o projeto  
 - **Docker Desktop** + Docker Compose V2 → subir o ambiente (n8n + PostgreSQL)  
+- **Node.js v22 (LTS)** e **npm** → somente se quiser compilar o node manualmente  
 
 ---
 
@@ -36,7 +37,16 @@ Para rodar este projeto você precisará de **Git** e **Docker**.
 
    > É **nessa pasta raiz** que ficam o arquivo `docker-compose.yml` e todos os comandos devem ser executados.
 
-3. **Atenção com containers existentes**  
+3. **Instalar dependências e compilar o node**  
+   Dentro da pasta raiz, rode:
+   ```bash
+   npm install
+   npm run build
+   ```
+   Isso gera a versão compilada do conector que o n8n carregará.  
+   ⚠️ Nesta versão não há múltiplas camadas de arquitetura — o código do node já está concentrado em um único arquivo no `TrueNumberGenerator`.
+
+4. **Atenção com containers existentes**  
    Se você já executou a versão **main**, o Docker pode estar usando as mesmas portas (5678) e nomes de containers (`n8n` e `n8n-postgres`).  
    Para evitar conflitos, você tem duas opções:
 
@@ -73,7 +83,7 @@ Para rodar este projeto você precisará de **Git** e **Docker**.
          ...
      ```
 
-4. **Subir o ambiente com Docker**  
+5. **Subir o ambiente com Docker**  
    Primeiro, abra o **Docker Desktop**.  
    Em seguida, no terminal posicionado na pasta raiz, execute:
    ```bash
@@ -84,19 +94,19 @@ Para rodar este projeto você precisará de **Git** e **Docker**.
    docker-compose up -d --build
    ```
 
-5. **Parar e limpar containers (quando necessário)**
+6. **Parar e limpar containers (quando necessário)**
    ```bash
    docker-compose down
    ```
 
-6. **Acessar o n8n**
+7. **Acessar o n8n**
    Abra no navegador:  
    👉 http://localhost:5678  
    (ou http://localhost:5679 caso tenha alterado a porta)
 
 ---
 
-### 🔎 Testando o conector
+## 🔎 Testando o conector
 
 No editor do n8n:
 1. Crie um novo workflow.  
@@ -105,6 +115,19 @@ No editor do n8n:
 4. Execute o fluxo.  
 
 Você verá o número aleatório retornado diretamente da API do Random.org.
+
+---
+
+## 🧩 Estrutura simplificada
+
+Diferente da versão `main`, aqui não há separação em **Presentation, Application, Domain, Infrastructure**.  
+O código está direto no arquivo do `TrueNumberGenerator`, mantendo o foco apenas no funcionamento do node.  
+
+- `CustomNodes/` → código do conector Random em um único arquivo  
+- `Docker/` → Dockerfile usado para construir a imagem  
+- `docker-compose.yml` → define os serviços (n8n + PostgreSQL)  
+- `n8n_data/` → volume para salvar configs e workflows  
+- `postgres_data/` → volume para persistir o banco de dados  
 
 ---
 
