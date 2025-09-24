@@ -25,15 +25,23 @@ export class TrueNumberGenerator implements INodeType {
         outputs: ["main"],
         properties: [
             {
-                displayName: "Configurações",
-                name: "settingsNotice",
-                type: "notice",
-                default: "",
+                displayName: "Operação",
+                name: "operation",
+                type: "options",
+                noDataExpression: true,
                 description:
-                    "Informe os valores mínimo e máximo. O resultado será um número inteiro dentro do intervalo. Lembre-se: até Einstein confiava em probabilidade!",
+                    "Informe os valores mínimo e máximo. O resultado será um número inteiro dentro do intervalo.",
+                options: [
+                    {
+                        name: 'True Random Number Generator',
+                        value: 'generate',
+                        action: 'Gere um número aleatório real',
+                    },
+                ],
+                default: 'generate',
             },
             {
-                displayName: "Número Mínimo",
+                displayName: "Min (Número Mínimo)",
                 name: "min",
                 type: "number",
                 typeOptions: {
@@ -42,10 +50,15 @@ export class TrueNumberGenerator implements INodeType {
                 default: 1,
                 description: "Valor mínimo possível (inclusivo). Ex: `1`",
                 required: true,
+                displayOptions: {
+                    show: {
+                        operation: ['generate'],
+                    },
+                },
                 hint: "Escolha um número mínimo. Quanto mais baixo, mais emocionante a surpresa! 😉",
             },
             {
-                displayName: "Número Máximo",
+                displayName: "Max (Número Máximo)",
                 name: "max",
                 type: "number",
                 typeOptions: {
@@ -54,6 +67,11 @@ export class TrueNumberGenerator implements INodeType {
                 default: 60,
                 description: "Valor máximo possível (inclusivo). Ex: `60`",
                 required: true,
+                displayOptions: {
+                    show: {
+                        operation: ['generate'],
+                    },
+                },
                 hint: "Defina o valor máximo. Lembre-se: números altos não aumentam a sorte, só a expectativa! 😄",
             },
         ],
@@ -67,6 +85,10 @@ export class TrueNumberGenerator implements INodeType {
         for (let i = 0; i < items.length; i++) {
             const min = this.getNodeParameter("min", i) as number;
             const max = this.getNodeParameter("max", i) as number;
+
+            if (min > max) {
+                throw new Error(`O valor mínimo (${min}) não pode ser maior que o máximo (${max}).`);
+            }
 
             const range = new MinMaxNumber(min, max);
             const randomNumber = await service.generate(range);
