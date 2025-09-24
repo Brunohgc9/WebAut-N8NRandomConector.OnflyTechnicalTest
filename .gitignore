@@ -43,8 +43,6 @@ jspm_packages/
 
 # Build directories
 dist/
-postgres_data/
-n8n_data/
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
@@ -146,3 +144,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Docker volumes / data
+n8n_data/
+postgres_data/
