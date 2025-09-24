@@ -27,12 +27,12 @@ git clone https://github.com/Brunohgc9/WebAut-N8NRandomConector.OnflyTechnicalTe
 cd WebAut-N8NRandomConector.OnflyTechnicalTest
 ```
 
-Se quiser trabalhar no código do conector, entre na pasta e rode:
+Entre na pasta raiz do projeto:
+Abra o terminal, navegue até o local onde a pasta raiz do projeto está salva (por exemplo, usando cd C:\Users\SeuUsuario\WebAut-N8NRandomConector.OnflyTechnicalTest).
+Depois de estar dentro da pasta raiz, rode os comandos:
 ```bash
-cd CustomNodes/TrueNumberGeneratorNode
 npm install
 npm run build
-cd ../../
 ```
 Esse comando gera a versão compilada do node que será carregada pelo n8n.
 
