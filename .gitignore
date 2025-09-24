@@ -147,4 +147,4 @@ vite.config.ts.timestamp-*
 
 # Docker volumes / data
 n8n_data/
-postgres-data/
+postgres_data/
