@@ -1,5 +1,5 @@
 {
-  "name": "webaut-n8nrandomconector.onflytechnicaltest",
+  "name": "webaut-n8nrandomconector.onflytechnicaltest.simplenode",
   "version": "0.1.0",
   "description": "Custom node for n8n: True Random Number Generator (Random.org)",
   "main": "dist/index.js",
@@ -13,12 +13,12 @@
   },
   "n8n": {
     "nodes": [
-      "dist/CustomNodes/TrueNumberGeneratorNode/Presentation/TrueNumberGenerator.node.js"
+      "dist/CustomNodes/TrueNumberGeneratorNode/TrueNumberGenerator.node.js"
     ]
   },
   "scripts": {
     "clean": "rimraf dist .tsbuildinfo",
-    "copy:icons": "cpx \"CustomNodes/TrueNumberGeneratorNode/Presentation/*.svg\" \"dist/TrueNumberGeneratorNode/Presentation/\"",
+    "copy:icons": "cpx \"CustomNodes/TrueNumberGeneratorNode/*.svg\" \"dist/TrueNumberGeneratorNode/\"",
     "build": "npm run clean && tsc -p tsconfig.json && npm run copy:icons",
     "dev": "ts-node-dev --respawn --transpile-only app/CustomNodes/TrueNumberGeneratorNode/Presentation/TrueNumberGenerator.node.ts",
     "lint": "eslint --ext .ts app",

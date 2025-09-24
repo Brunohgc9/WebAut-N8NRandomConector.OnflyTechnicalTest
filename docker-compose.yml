@@ -5,7 +5,7 @@ services:
   # PostgreSQL database service
   postgres:
     image: postgres:15-alpine
-    container_name: n8n-postgres
+    container_name: n8n-postgres-simple-node ##Optional: If you want to start another container without deleting the existing one, change the name
     restart: unless-stopped
     environment:
       POSTGRES_USER: n8n
@@ -21,7 +21,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: n8n
+    container_name: n8n-simple-node
     restart: unless-stopped
     ports:
       - "5678:5678"

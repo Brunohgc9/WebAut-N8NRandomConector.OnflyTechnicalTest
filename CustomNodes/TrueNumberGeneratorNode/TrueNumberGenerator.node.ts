@@ -1,18 +1,16 @@
+import axios from "axios";
 import type {
     INodeType,
     INodeTypeDescription,
     INodeExecutionData,
-    IExecuteFunctions
+    IExecuteFunctions,
 } from "n8n-workflow";
-
-import { MinMaxNumber } from "../Domain/MinMaxNumber.entity";
-import { TrueNumberGeneratorService } from "../Application/TrueNumberGenerator.service";
 
 export class TrueNumberGenerator implements INodeType {
     description: INodeTypeDescription = {
         displayName: "Random",
         name: "random",
-        icon: 'file:./TrueNumberGenerator.icon.svg',
+        icon: "file:./TrueNumberGenerator.icon.svg", // mantém o ícone do primeiro
         group: ["transform"],
         version: 1,
         description:
@@ -62,22 +60,35 @@ export class TrueNumberGenerator implements INodeType {
     async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
         const items = this.getInputData();
         const returnData: INodeExecutionData[] = [];
-        const service = new TrueNumberGeneratorService();
 
         for (let i = 0; i < items.length; i++) {
             const min = this.getNodeParameter("min", i) as number;
             const max = this.getNodeParameter("max", i) as number;
 
-            const range = new MinMaxNumber(min, max);
-            const randomNumber = await service.generate(range);
+            try {
+                const response = await axios.get("https://www.random.org/integers/", {
+                    params: {
+                        num: 1,
+                        min,
+                        max,
+                        col: 1,
+                        base: 10,
+                        format: "plain",
+                        rnd: "new",
+                    },
+                });
 
-            returnData.push({ json: { randomNumber } });
+                returnData.push({
+                    json: { randomNumber: parseInt(response.data, 10) },
+                });
+            } catch (error: any) {
+                throw new Error(`Erro ao chamar Random.org: ${error.message || error}`);
+            }
         }
 
         return this.prepareOutputData(returnData);
     }
 }
 
-// Exportação compatível com CommonJS e ES Modules
 module.exports = { TrueNumberGenerator };
 module.exports.default = TrueNumberGenerator;
