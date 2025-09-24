@@ -98,7 +98,7 @@ npm link
 Depois, dentro da pasta `.n8n/custom`, rode:
 
 ```bash
-npm link n8n-nodes-random
+npm link webaut-n8nrandomconector.onflytechnicaltest
 ```
 
 Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
