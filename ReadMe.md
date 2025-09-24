@@ -36,7 +36,16 @@ cd ../../
 ```
 Esse comando gera a versão compilada do node que será carregada pelo n8n.
 
-Agora é só subir o ambiente:
+Abra o **Prompt de Comando (cmd)** ou o **terminal** e navegue até a pasta raiz do projeto que você acabou de clonar.  
+Por exemplo, se você clonou o projeto em `C:\Users\SeuUsuario\`, rode:
+
+```bash
+cd C:\Users\SeuUsuario\WebAut-N8NRandomConector.OnflyTechnicalTest
+```
+
+> É **dentro dessa pasta raiz** que ficam os arquivos `docker-compose.yml` e onde você vai rodar os comandos do Docker.
+
+Agora é só subir o ambiente, na **pasta raiz do projeto**, execute:
 ```bash
 docker-compose up --build
 ```
