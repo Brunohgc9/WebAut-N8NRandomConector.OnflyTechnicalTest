@@ -133,3 +133,55 @@ O código está direto no arquivo do `TrueNumberGenerator`, mantendo o foco apen
 
 ✍️ **Autor:** Bruno Henrique Gonçalves Correia  
 📌 Desenvolvido como parte do processo técnico da Onfly
+
+
+---
+
+## ⚙️ Usando a pasta `.n8n/custom` para testar o node
+
+Você pode rodar o n8n localmente sem Docker e testar seus nós personalizados criando a pasta **.n8n/custom** no seu usuário do sistema.  
+
+### Criando a pasta `.n8n/custom`
+
+- **Windows**  
+  Abra o terminal (PowerShell ou CMD) e rode:
+
+  ```bash
+  mkdir %USERPROFILE%\.n8n\custom
+  cd %USERPROFILE%\.n8n\custom
+  ```
+
+- **Linux / macOS**  
+  ```bash
+  mkdir -p ~/.n8n/custom
+  cd ~/.n8n/custom
+  ```
+
+### Inicializar com `npm init`
+
+Dentro dessa pasta recém-criada, inicialize um projeto npm:
+
+```bash
+npm init -y
+```
+
+Isso cria um `package.json` básico para gerenciar dependências.
+
+### Preparar o nó customizado com `npm link`
+
+Agora, volte para a pasta do nó compilado e rode:
+
+```bash
+cd WebAut-N8NRandomConector.OnflyTechnicalTest/CustomNodes/Random
+npm install
+npm run build
+npm link
+```
+
+Depois, dentro da pasta `.n8n/custom`, rode:
+
+```bash
+npm link webaut-n8nrandomconector.onflytechnicaltest.simplenode"
+```
+
+Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
