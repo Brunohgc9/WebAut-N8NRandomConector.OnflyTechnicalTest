@@ -131,12 +131,6 @@ O código está direto no arquivo do `TrueNumberGenerator`, mantendo o foco apen
 
 ---
 
-✍️ **Autor:** Bruno Henrique Gonçalves Correia  
-📌 Desenvolvido como parte do processo técnico da Onfly
-
-
----
-
 ## ⚙️ Usando a pasta `.n8n/custom` para testar o node
 
 Você pode rodar o n8n localmente sem Docker e testar seus nós personalizados criando a pasta **.n8n/custom** no seu usuário do sistema.  
@@ -185,3 +179,12 @@ npm link webaut-n8nrandomconector.onflytechnicaltest.simplenode"
 ```
 
 Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
+
+---
+
+✍️ **Autor:** Bruno Henrique Gonçalves Correia  
+📌 Desenvolvido como parte do processo técnico da Onfly
+
+
+---
+
