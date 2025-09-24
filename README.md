@@ -83,7 +83,30 @@ Para rodar este projeto você precisará de **Git**, **Docker** e **Node.js** (e
          ...
      ```
 
-5. **Subir o ambiente com Docker**  
+5. **⚙️ Configuração de variáveis de ambiente (.env)**
+
+O projeto já possui um arquivo `.env.example` na raiz.  
+Para configurar, basta criar uma cópia dele com o nome `.env`:
+
+```bash
+cp .env.example .env
+```
+
+### Variáveis principais
+
+- `POSTGRES_USER` → usuário do banco (padrão: `n8n`)
+- `POSTGRES_PASSWORD` → senha do banco (padrão: `n8n`)
+- `POSTGRES_DB` → nome do banco (padrão: `n8n`)
+- `N8N_HOST` → host da aplicação (padrão: `localhost`)
+- `N8N_PORT` → porta onde o n8n rodará (padrão: `5678`)
+
+### 🔄 Fallback
+Caso alguma variável não esteja definida no `.env`, o sistema utiliza valores padrão já embutidos no `docker-compose.yml`.  
+Isso garante que, mesmo esquecendo de configurar algo, o ambiente ainda subirá corretamente.
+
+> Recomendo, no entanto, sempre ajustar o `.env` para refletir seu ambiente local e evitar problemas em produção.
+
+6. **Subir o ambiente com Docker**  
    Primeiro, abra o **Docker Desktop**.  
    Em seguida, no terminal posicionado na pasta raiz, execute:
    ```bash
@@ -94,12 +117,12 @@ Para rodar este projeto você precisará de **Git**, **Docker** e **Node.js** (e
    docker-compose up -d --build
    ```
 
-6. **Parar e limpar containers (quando necessário)**
+7. **Parar e limpar containers (quando necessário)**
    ```bash
    docker-compose down
    ```
 
-7. **Acessar o n8n**
+8. **Acessar o n8n**
    Abra no navegador:  
    👉 http://localhost:5678  
    (ou http://localhost:5679 caso tenha alterado a porta)
@@ -175,7 +198,7 @@ npm link
 Depois, dentro da pasta `.n8n/custom`, rode:
 
 ```bash
-npm link webaut-n8nrandomconector.onflytechnicaltest.simplenode"
+npm link webaut-n8nrandomconector.onflytechnicaltest.simplenode
 ```
 
 Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
@@ -184,7 +207,3 @@ Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
 
 ✍️ **Autor:** Bruno Henrique Gonçalves Correia  
 📌 Desenvolvido como parte do processo técnico da Onfly
-
-
----
-

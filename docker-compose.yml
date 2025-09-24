@@ -1,57 +1,61 @@
 version: "3.9"
 
 services:
-
   # PostgreSQL database service
   postgres:
-    image: postgres:15-alpine
-    container_name: n8n-postgres-simple-node ##Optional: If you want to start another container without deleting the existing one, change the name
+    image: ${POSTGRES_IMAGE:-postgres:15-alpine}
+    container_name: n8n-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: n8n
-      POSTGRES_PASSWORD: n8n
-      POSTGRES_DB: n8n
+      POSTGRES_USER: ${POSTGRES_USER:-n8n}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-n8n}
+      POSTGRES_DB: ${POSTGRES_DB:-n8n}
     volumes:
-      - ./postgres_data:/var/lib/postgresql/data  # persistent database data
+      - ${POSTGRES_DATA:-./postgres_data}:/var/lib/postgresql/data
     networks:
       - n8n-network
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
 
   # n8n automation service
   n8n:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    container_name: n8n-simple-node
+    container_name: n8n
     restart: unless-stopped
     ports:
-      - "5678:5678"
+      - "${N8N_PORT:-5678}:5678"
     environment:
       # Database configuration
-      DB_TYPE: postgresdb
-      DB_POSTGRESDB_HOST: postgres
-      DB_POSTGRESDB_PORT: 5432
-      DB_POSTGRESDB_DATABASE: n8n
-      DB_POSTGRESDB_USER: n8n
-      DB_POSTGRESDB_PASSWORD: n8n
+      DB_TYPE: ${DB_TYPE:-postgresdb}
+      DB_POSTGRESDB_HOST: ${DB_HOST:-postgres}
+      DB_POSTGRESDB_PORT: ${DB_PORT:-5432}
+      DB_POSTGRESDB_DATABASE: ${DB_DATABASE:-n8n}
+      DB_POSTGRESDB_USER: ${DB_USER:-n8n}
+      DB_POSTGRESDB_PASSWORD: ${DB_PASSWORD:-n8n}
 
       # Custom nodes path
-      N8N_CUSTOM_EXTENSIONS: /home/node/.n8n/custom
+      N8N_CUSTOM_EXTENSIONS: ${N8N_CUSTOM_EXTENSIONS:-/home/node/.n8n/custom}
 
       # Security settings
-      N8N_BASIC_AUTH_ACTIVE: "true"
-      N8N_BASIC_AUTH_USER: "admin"
-      N8N_BASIC_AUTH_PASSWORD: "admin"
-      NODE_ENV: "production"
-      N8N_HOST: "localhost"
-      N8N_PORT: 5678
+      N8N_BASIC_AUTH_ACTIVE: ${N8N_BASIC_AUTH_ACTIVE:-true}
+      N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER:-admin}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD:-admin}
+      NODE_ENV: ${NODE_ENV:-production}
+      N8N_HOST: ${N8N_HOST:-localhost}
+      N8N_PORT: ${N8N_PORT:-5678}
 
       # Execution and timezone settings
-      EXECUTIONS_PROCESS: "main"
-      GENERIC_TIMEZONE: "UTC"
+      EXECUTIONS_PROCESS: ${EXECUTIONS_PROCESS:-main}
+      GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-UTC}
+
+      # Random.org API (caso precise no node)
+      RANDOM_ORG_URL: ${RANDOM_ORG_URL:-https://www.random.org/integers/?num=1&min={min}&max={max}&col=1&base=10&format=plain&rnd=new}
 
     volumes:
-      - ./n8n_data:/home/node/.n8n             # persistent workflows, credentials, and settings
-      - ./dist/TrueNumberGeneratorNode:/home/node/.n8n/custom  # compiled custom nodes
+      - ${N8N_DATA:-./n8n_data}:/home/node/.n8n
+      - ${DIST_CUSTOM_NODE:-./dist/TrueNumberGeneratorNode}:${N8N_CUSTOM_EXTENSIONS:-/home/node/.n8n/custom}
 
     depends_on:
       - postgres
