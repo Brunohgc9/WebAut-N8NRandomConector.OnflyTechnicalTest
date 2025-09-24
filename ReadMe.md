@@ -9,21 +9,25 @@ O projeto está disponível em duas versões:
 - **Versão principal (`main`)** → organizada em camadas e inspirada em _clean architecture_.
 - **Versão simplificada (`simple-node`)** → todo o código em um único arquivo, sem separação de responsabilidades.
 
+
 ---
 
-## 🚀 Parte 1 — Como instalar e rodar
+
+## 🚀 Instalação e execução
 
 Para rodar este projeto você precisará de **Git**, **Docker** e **Node.js** (este último apenas se quiser recompilar o node).
 
-### Requisitos
+### 📋 Requisitos
 
 - **Git** → clonar o projeto
 - **Docker Desktop** + Docker Compose V2 → subir o ambiente (n8n + PostgreSQL)
 - **Node.js v22 (LTS)** e **npm** → somente se quiser compilar o node manualmente
 
+
 ---
 
-### Passo a passo
+
+### 🛠️ Passo a passo
 
 1. **Clonar o repositório**
 
@@ -52,7 +56,31 @@ Para rodar este projeto você precisará de **Git**, **Docker** e **Node.js** (e
 
    Isso gera a versão compilada do conector que o n8n carregará.
 
-4. **Rodando o n8n localmente e usando nós customizados**
+
+4. **⚙️ Configuração de variáveis de ambiente**
+
+O projeto já possui um arquivo `.env.example` na raiz.  
+Para configurar, basta criar uma cópia dele com o nome `.env`:
+
+```bash
+cp .env.example .env
+```
+
+### Variáveis principais
+
+- `POSTGRES_USER` → usuário do banco (padrão: `n8n`)
+- `POSTGRES_PASSWORD` → senha do banco (padrão: `n8n`)
+- `POSTGRES_DB` → nome do banco (padrão: `n8n`)
+- `N8N_HOST` → host da aplicação (padrão: `localhost`)
+- `N8N_PORT` → porta onde o n8n rodará (padrão: `5678`)
+
+### 🔄 Fallback
+Caso alguma variável não esteja definida no `.env`, o sistema utiliza valores padrão já embutidos no `docker-compose.yml`.  
+Isso garante que, mesmo esquecendo de configurar algo, o ambiente ainda subirá corretamente.
+
+> Recomendo, no entanto, sempre ajustar o `.env` para refletir seu ambiente local e evitar problemas em produção.
+
+5. **Rodando o n8n localmente e usando nós customizados**
 
 Você pode rodar o n8n localmente sem Docker e testar seus nós personalizados.
 
@@ -103,7 +131,7 @@ npm link webaut-n8nrandomconector.onflytechnicaltest
 
 Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
 
-5. **Subir o ambiente com Docker**  
+6. **Subir o ambiente com Docker**  
    Primeiro, abra o **Docker Desktop**.  
    Em seguida, no terminal posicionado na pasta raiz, execute:
 
@@ -117,19 +145,21 @@ Isso faz com que o n8n reconheça seu nó customizado sempre que iniciar.
    docker-compose up -d --build
    ```
 
-6. **Parar e limpar containers (quando necessário)**
+7. **Parar e limpar containers (quando necessário)**
 
    ```bash
    docker-compose down
    ```
 
-7. **Acessar o n8n**
+8. **Acessar o n8n**
    Abra no navegador:  
    👉 http://localhost:5678
 
+
 ---
 
-### 🔎 Testando o conector
+
+## 🔎 Testando o conector
 
 No editor do n8n:
 
@@ -140,9 +170,11 @@ No editor do n8n:
 
 Você verá o número aleatório retornado diretamente da API do Random.org.
 
+
 ---
 
-## 🧩 Parte 2 — Estrutura e arquitetura
+
+## 🧩 Estrutura e arquitetura
 
 A branch principal não traz apenas um conector funcional: ela foi pensada para mostrar uma forma organizada de estruturar um node customizado no n8n.  
 O código foi separado em **camadas inspiradas no clean architecture**:
@@ -163,9 +195,11 @@ Essa separação facilita manutenção, evolução e até a criação de testes 
 - `n8n_data/` → volume para salvar configs e workflows
 - `postgres_data/` → volume para persistir o banco de dados
 
+
 ---
 
-## ⚡ Versão simplificada
+
+## ⚡ Versão simplificada (opcional)
 
 Se você não se interessa pela separação em camadas e só quer ver o conector funcionando de forma direta, sem abstrações, troque para a branch:
 
@@ -176,7 +210,9 @@ git checkout simple-node
 Nela você encontrará um único arquivo com toda a lógica embutida.  
 É a forma mais rápida de entender a essência do node, mas sem preocupações arquiteturais.
 
+
 ---
+
 
 ✍️ **Autor:** Bruno Henrique Gonçalves Correia  
 📌 Desenvolvido como parte do processo técnico da Onfly  
